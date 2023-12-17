@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style type="text/css">
+        a, a:hover {
+            cursor: pointer;
+        }
+
+        #goog-gt-tt {
+            display: none !important;
+        }
+
+        .goog-te-banner-frame {
+            display: none !important;
+        }
+
+        body {
+            top: 0 !important;
+        }
+
+        #google_translate_element2 {
+            display: none !important;
+        }
+
+        .skiptranslate {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container p-5">
+        <div class="p-5 text-center bg-body-tertiary rounded-3">
+            <div class="p-3">
+                <select class="form-select w-25 d-block mx-auto" onchange="doGTranslate(this);">
+                    <option value="en|vi">Vietnamese</option>
+                    <option value="en|en">English</option>
+                </select>
+            </div>
+            <div class="p-3">
+                <a class="mx-3" onclick="doGTranslate('en|vi');return false;"><img src="img/vi.png"></a>
+                <a class="mx-3" onclick="doGTranslate('en|en');return false;"><img src="img/en.png"></a>
+            </div>
+            <div id="google_translate_element2"></div>
+            <div class="py-5">Xin chào mọi người!</div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        // GTranslate
+        function googleTranslateElementInit2() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'vi',
+                autoDisplay: false
+            }, 'google_translate_element2');
+        }
+        function GTranslateFireEvent(a, b) {
+            try {
+                if (document.createEvent) {
+                    var c = document.createEvent("HTMLEvents");
+                    c.initEvent(b, true, true);
+                    a.dispatchEvent(c)
+                } else {
+                    var c = document.createEventObject();
+                    a.fireEvent('on' + b, c)
+                }
+            } catch (e) { }
+        }
+        function doGTranslate(a) {
+            if (a.value) a = a.value;
+            if (a == '') return;
+            var b = a.split('|')[1];
+            var c;
+            var d = document.getElementsByTagName('select');
+            for (var i = 0; i < d.length; i++)
+                if (d[i].className == 'goog-te-combo') c = d[i];
+            if (document.getElementById('google_translate_element2') == null || document.getElementById('google_translate_element2').innerHTML.length == 0 || c.length == 0 || c.innerHTML.length == 0) {
+                setTimeout(function () {
+                    doGTranslate(a)
+                }, 500)
+            } else {
+                c.value = b;
+                GTranslateFireEvent(c, 'change');
+                GTranslateFireEvent(c, 'change')
+            }
+        }
+    </script>
+    <script type="text/javascript" src="https://bit.ly/googleTranslateElementInit2"></script>
+</body>
+
+</html>
